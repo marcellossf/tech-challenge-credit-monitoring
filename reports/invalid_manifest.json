@@ -1,0 +1,12 @@
+{
+  "kind": "invalid",
+  "seed": 42,
+  "synthetic": true,
+  "expected_rejection": true,
+  "violations": [
+    "missing LIMIT_BAL",
+    "AGE=150",
+    "duplicate row_id"
+  ],
+  "labels_synthetic": false
+}

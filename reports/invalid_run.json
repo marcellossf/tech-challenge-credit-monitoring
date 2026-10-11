@@ -1,0 +1,43 @@
+{
+  "scenario": "invalid",
+  "rows": 6001,
+  "alerts": [
+    "DATA_QUALITY: whole batch blocked before inference"
+  ],
+  "metrics": {},
+  "drift": {},
+  "artifacts": {
+    "manifest": "invalid_manifest.json",
+    "quality_errors": "quality_errors.json"
+  },
+  "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+  "status": "BLOCKED",
+  "inference_executed": false,
+  "rejected_rows": 6001,
+  "quality_errors": [
+    {
+      "column": "AGE",
+      "rule": "age_range",
+      "count": 1
+    },
+    {
+      "column": "LIMIT_BAL",
+      "rule": "not_nullable",
+      "count": 1
+    },
+    {
+      "column": "row_id",
+      "rule": "field_uniqueness",
+      "count": 2
+    }
+  ],
+  "resources": {
+    "peak_rss_mb": 356.105,
+    "cpu_percent_mean": 74.0,
+    "disk_free_gb": 296.85,
+    "samples": 2,
+    "sampling_interval_seconds": 0.1
+  },
+  "duration_seconds": 0.0222,
+  "mlflow_run_id": "9f31f2c9c512425bb6ffa0930a012660"
+}

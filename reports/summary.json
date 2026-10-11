@@ -1,0 +1,1121 @@
+{
+  "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+  "generated_at_utc": "2026-10-11T00:43:58.230785+00:00",
+  "source_commit": "40fca715b53ff5baba76f7566a2b557776ddf3c2",
+  "source_sha256": "55fdf815f3d61aa8dbfaf0d1d05c26381cd5a42339ade04b9dd1d6c638d90051",
+  "configuration": {
+    "seed": 42,
+    "drift": {
+      "psi_threshold": 0.2,
+      "ks_alpha": 0.01,
+      "ks_effect_threshold": 0.1
+    },
+    "performance": {
+      "recall_drop_threshold": 0.1,
+      "pr_auc_drop_threshold": 0.1,
+      "brier_increase_threshold": 0.05
+    }
+  },
+  "configuration_sha256": "555007d1d79835511e7a80ee8be4b51791831f6cedd6c3f7296dfa351e0f1ad5",
+  "versions": {
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "pandera": "0.34.1",
+    "evidently": "0.7.23",
+    "mlflow": "3.17.0"
+  },
+  "baseline": {
+    "model": "StandardScaler + LogisticRegression",
+    "seed": 42,
+    "features": [
+      "AGE",
+      "LIMIT_BAL",
+      "PAY_0",
+      "BILL_AMT1",
+      "PAY_AMT1"
+    ],
+    "threshold": 0.27798968172026783,
+    "threshold_policy": "maximum validation F1; academic choice, not credit approval policy",
+    "train_rows": 18000,
+    "validation_rows": 6000,
+    "metrics": {
+      "roc_auc": 0.6963934939625751,
+      "pr_auc": 0.46826953381405734,
+      "precision": 0.5019700551615445,
+      "recall": 0.4800301431801055,
+      "f1": 0.49075500770416025,
+      "brier": 0.14981346369144175,
+      "confusion_matrix": [
+        [
+          4041,
+          632
+        ],
+        [
+          690,
+          637
+        ]
+      ]
+    },
+    "dummy_metrics": {
+      "roc_auc": 0.5,
+      "pr_auc": 0.22116666666666668,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "brier": 0.17225197530864197,
+      "confusion_matrix": [
+        [
+          4673,
+          0
+        ],
+        [
+          1327,
+          0
+        ]
+      ]
+    },
+    "coefficients_standardized": {
+      "AGE": 0.07251155387051314,
+      "LIMIT_BAL": -0.18563974790890786,
+      "PAY_0": 0.8129330362433755,
+      "BILL_AMT1": -0.10808076072332078,
+      "PAY_AMT1": -0.15523627347514937
+    },
+    "model_sha256": "ee3be79a945edbca52cfe2e0a50c70940485dcc7a6cf33c8b2e36aba2fe8609c"
+  },
+  "baseline_mlflow_run_id": "a6421f52b7834ff0a2cb5ebe871bd970",
+  "provenance": {
+    "source": "https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients",
+    "download_url": "https://archive.ics.uci.edu/static/public/350/default+of+credit+card+clients.zip",
+    "author": "I-Cheng Yeh",
+    "doi": "10.24432/C55S3H",
+    "license": "CC BY 4.0",
+    "raw_sha256": "56c885f84457f6680f8438f02bfcdac9579323d8a94465ee5f26e32baa727602",
+    "seed": 42,
+    "rows": 30000,
+    "rows_rejected": 0,
+    "features": [
+      "AGE",
+      "LIMIT_BAL",
+      "PAY_0",
+      "BILL_AMT1",
+      "PAY_AMT1"
+    ],
+    "split_method": "stratified random 60/20/20; simulated production, not temporal holdout",
+    "splits": {
+      "reference": {
+        "rows": 18000,
+        "default_rate": 0.2212222222222222,
+        "sha256": "e1da2f070259c08c96d7168e3efe7e13ce3e3141dc437c036e4ce91355dbf996"
+      },
+      "validation": {
+        "rows": 6000,
+        "default_rate": 0.22116666666666668,
+        "sha256": "3706a8ab684e6b71e3ce662b5cf26ae89674533e9fd0d2fd7e1dfef9a64e115f"
+      },
+      "production": {
+        "rows": 6000,
+        "default_rate": 0.22116666666666668,
+        "sha256": "aee59537290d2d6da710725bca43532c36e79040bf6463bbc7a19e821ed62472"
+      }
+    },
+    "profile": {
+      "AGE": {
+        "dtype": "int64",
+        "null_count": 0,
+        "min": 21.0,
+        "max": 79.0
+      },
+      "LIMIT_BAL": {
+        "dtype": "int64",
+        "null_count": 0,
+        "min": 10000.0,
+        "max": 1000000.0
+      },
+      "PAY_0": {
+        "dtype": "int64",
+        "null_count": 0,
+        "min": -2.0,
+        "max": 8.0
+      },
+      "BILL_AMT1": {
+        "dtype": "int64",
+        "null_count": 0,
+        "min": -165580.0,
+        "max": 964511.0
+      },
+      "PAY_AMT1": {
+        "dtype": "int64",
+        "null_count": 0,
+        "min": 0.0,
+        "max": 873552.0
+      }
+    },
+    "excluded_predictors": [
+      "row_id",
+      "SEX",
+      "EDUCATION",
+      "MARRIAGE",
+      "target"
+    ]
+  },
+  "runs": [
+    {
+      "scenario": "control",
+      "rows": 6000,
+      "alerts": [],
+      "metrics": {
+        "roc_auc": 0.7187085908224562,
+        "pr_auc": 0.4973729349754632,
+        "precision": 0.5192012288786483,
+        "recall": 0.5094197437829691,
+        "f1": 0.5142639786991251,
+        "brier": 0.14593156946928795,
+        "confusion_matrix": [
+          [
+            4047,
+            626
+          ],
+          [
+            651,
+            676
+          ]
+        ]
+      },
+      "drift": {
+        "scenario": "control",
+        "reference_rows": 18000,
+        "current_rows": 6000,
+        "config": {
+          "psi_threshold": 0.2,
+          "alpha": 0.01,
+          "ks_min_effect": 0.1,
+          "bins": 10
+        },
+        "features": [
+          {
+            "feature": "AGE",
+            "psi": 0.002665359366046092,
+            "ks_statistic": 0.014722222222222303,
+            "ks_pvalue": 0.28078904547022887,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "LIMIT_BAL",
+            "psi": 0.0012131220453148938,
+            "ks_statistic": 0.010333333333333306,
+            "ks_pvalue": 0.7184692857915382,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "PAY_0",
+            "psi": 0.0005119765567638597,
+            "ks_statistic": 0.006333333333333302,
+            "ks_pvalue": 0.9931777181291191,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "BILL_AMT1",
+            "psi": 0.0012522189461811415,
+            "ks_statistic": 0.01127777777777772,
+            "ks_pvalue": 0.6120295658255912,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "PAY_AMT1",
+            "psi": 0.0013138317666659424,
+            "ks_statistic": 0.015499999999999847,
+            "ks_pvalue": 0.2274280130767743,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          }
+        ],
+        "drift_detected": false,
+        "drifted_features": [],
+        "evidently_html": "control_evidently.html",
+        "evidently_json": "control_evidently.json",
+        "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+      },
+      "artifacts": {
+        "manifest": "control_manifest.json",
+        "evidently_html": "control_evidently.html",
+        "evidently_json": "control_evidently.json",
+        "statistical_summary": "control_drift.json"
+      },
+      "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+      "subgroups_age": {
+        "18-29": {
+          "rows": 1926,
+          "metrics": {
+            "roc_auc": 0.7175322164439991,
+            "pr_auc": 0.49665972066313674,
+            "precision": 0.5044052863436124,
+            "recall": 0.5439429928741093,
+            "f1": 0.5234285714285715,
+            "brier": 0.14500986241794855,
+            "confusion_matrix": [
+              [
+                1280,
+                225
+              ],
+              [
+                192,
+                229
+              ]
+            ]
+          }
+        },
+        "30-49": {
+          "rows": 3502,
+          "metrics": {
+            "roc_auc": 0.7247164894500148,
+            "pr_auc": 0.5131461034015281,
+            "precision": 0.5294964028776978,
+            "recall": 0.4861294583883752,
+            "f1": 0.5068870523415978,
+            "brier": 0.14230641760574045,
+            "confusion_matrix": [
+              [
+                2418,
+                327
+              ],
+              [
+                389,
+                368
+              ]
+            ]
+          }
+        },
+        "50-100": {
+          "rows": 572,
+          "metrics": {
+            "roc_auc": 0.6873006806606692,
+            "pr_auc": 0.46564568729882977,
+            "precision": 0.5163398692810458,
+            "recall": 0.5302013422818792,
+            "f1": 0.5231788079470199,
+            "brier": 0.1712296282228247,
+            "confusion_matrix": [
+              [
+                349,
+                74
+              ],
+              [
+                70,
+                79
+              ]
+            ]
+          }
+        }
+      },
+      "status": "HEALTHY",
+      "inference_executed": true,
+      "label_interpretation": "Original labels; shifted-X metrics are illustrative counterfactuals",
+      "resources": {
+        "peak_rss_mb": 356.059,
+        "cpu_percent_mean": 103.173,
+        "disk_free_gb": 296.854,
+        "samples": 27,
+        "sampling_interval_seconds": 0.1
+      },
+      "duration_seconds": 2.9917,
+      "mlflow_run_id": "2bd7a0df248d44a2a8c0daa431b8bfc7"
+    },
+    {
+      "scenario": "invalid",
+      "rows": 6001,
+      "alerts": [
+        "DATA_QUALITY: whole batch blocked before inference"
+      ],
+      "metrics": {},
+      "drift": {},
+      "artifacts": {
+        "manifest": "invalid_manifest.json",
+        "quality_errors": "quality_errors.json"
+      },
+      "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+      "status": "BLOCKED",
+      "inference_executed": false,
+      "rejected_rows": 6001,
+      "quality_errors": [
+        {
+          "column": "AGE",
+          "rule": "age_range",
+          "count": 1
+        },
+        {
+          "column": "LIMIT_BAL",
+          "rule": "not_nullable",
+          "count": 1
+        },
+        {
+          "column": "row_id",
+          "rule": "field_uniqueness",
+          "count": 2
+        }
+      ],
+      "resources": {
+        "peak_rss_mb": 356.105,
+        "cpu_percent_mean": 74.0,
+        "disk_free_gb": 296.85,
+        "samples": 2,
+        "sampling_interval_seconds": 0.1
+      },
+      "duration_seconds": 0.0222,
+      "mlflow_run_id": "9f31f2c9c512425bb6ffa0930a012660"
+    },
+    {
+      "scenario": "data_drift_t1",
+      "rows": 6000,
+      "alerts": [
+        "DATA_DRIFT: LIMIT_BAL, PAY_AMT1"
+      ],
+      "metrics": {
+        "roc_auc": 0.7195994046834813,
+        "pr_auc": 0.49628777611693736,
+        "precision": 0.5301689460981497,
+        "recall": 0.49660889223813115,
+        "f1": 0.51284046692607,
+        "brier": 0.14608040496000274,
+        "confusion_matrix": [
+          [
+            4089,
+            584
+          ],
+          [
+            668,
+            659
+          ]
+        ]
+      },
+      "drift": {
+        "scenario": "data_drift_t1",
+        "reference_rows": 18000,
+        "current_rows": 6000,
+        "config": {
+          "psi_threshold": 0.2,
+          "alpha": 0.01,
+          "ks_min_effect": 0.1,
+          "bins": 10
+        },
+        "features": [
+          {
+            "feature": "AGE",
+            "psi": 0.002665359366046092,
+            "ks_statistic": 0.014722222222222303,
+            "ks_pvalue": 0.28078904547022887,
+            "ks_pvalue_holm": 0.8423671364106866,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "LIMIT_BAL",
+            "psi": 0.11700023852662017,
+            "ks_statistic": 0.15555555555555556,
+            "ks_pvalue": 1.4636726622822775e-95,
+            "ks_pvalue_holm": 5.85469064912911e-95,
+            "psi_alert": false,
+            "ks_alert": true,
+            "drift_detected": true
+          },
+          {
+            "feature": "PAY_0",
+            "psi": 0.0005119765567638597,
+            "ks_statistic": 0.006333333333333302,
+            "ks_pvalue": 0.9931777181291191,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "BILL_AMT1",
+            "psi": 0.0012522189461811415,
+            "ks_statistic": 0.01127777777777772,
+            "ks_pvalue": 0.6120295658255912,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "PAY_AMT1",
+            "psi": 0.1328570590449644,
+            "ks_statistic": 0.17133333333333334,
+            "ks_pvalue": 5.720253689415816e-116,
+            "ks_pvalue_holm": 2.860126844707908e-115,
+            "psi_alert": false,
+            "ks_alert": true,
+            "drift_detected": true
+          }
+        ],
+        "drift_detected": true,
+        "drifted_features": [
+          "LIMIT_BAL",
+          "PAY_AMT1"
+        ],
+        "evidently_html": "data_drift_t1_evidently.html",
+        "evidently_json": "data_drift_t1_evidently.json",
+        "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+      },
+      "artifacts": {
+        "manifest": "data_drift_t1_manifest.json",
+        "evidently_html": "data_drift_t1_evidently.html",
+        "evidently_json": "data_drift_t1_evidently.json",
+        "statistical_summary": "data_drift_t1_drift.json"
+      },
+      "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+      "subgroups_age": {
+        "18-29": {
+          "rows": 1926,
+          "metrics": {
+            "roc_auc": 0.7177468612147947,
+            "pr_auc": 0.49547592576042115,
+            "precision": 0.509009009009009,
+            "recall": 0.5368171021377672,
+            "f1": 0.522543352601156,
+            "brier": 0.14489791336979788,
+            "confusion_matrix": [
+              [
+                1287,
+                218
+              ],
+              [
+                195,
+                226
+              ]
+            ]
+          }
+        },
+        "30-49": {
+          "rows": 3502,
+          "metrics": {
+            "roc_auc": 0.7257824361815526,
+            "pr_auc": 0.5124217367307567,
+            "precision": 0.5446153846153846,
+            "recall": 0.4676354029062087,
+            "f1": 0.5031982942430704,
+            "brier": 0.14253321259182766,
+            "confusion_matrix": [
+              [
+                2449,
+                296
+              ],
+              [
+                403,
+                354
+              ]
+            ]
+          }
+        },
+        "50-100": {
+          "rows": 572,
+          "metrics": {
+            "roc_auc": 0.6883319847049677,
+            "pr_auc": 0.4623903827590982,
+            "precision": 0.5302013422818792,
+            "recall": 0.5302013422818792,
+            "f1": 0.5302013422818792,
+            "brier": 0.1717792624356736,
+            "confusion_matrix": [
+              [
+                353,
+                70
+              ],
+              [
+                70,
+                79
+              ]
+            ]
+          }
+        }
+      },
+      "performance_changes_vs_control": {
+        "recall_drop": 0.012810851544837909,
+        "pr_auc_drop": 0.0010851588585258365,
+        "brier_increase": 0.0001488354907147882
+      },
+      "status": "ALERT",
+      "inference_executed": true,
+      "label_interpretation": "Original labels; shifted-X metrics are illustrative counterfactuals",
+      "resources": {
+        "peak_rss_mb": 370.406,
+        "cpu_percent_mean": 74.7,
+        "disk_free_gb": 296.85,
+        "samples": 6,
+        "sampling_interval_seconds": 0.1
+      },
+      "duration_seconds": 0.4743,
+      "mlflow_run_id": "67066d56843742149e70db941c2640fe"
+    },
+    {
+      "scenario": "data_drift_t2",
+      "rows": 6000,
+      "alerts": [
+        "DATA_DRIFT: LIMIT_BAL, PAY_AMT1"
+      ],
+      "metrics": {
+        "roc_auc": 0.7200294916797437,
+        "pr_auc": 0.4948153932156303,
+        "precision": 0.5349032800672834,
+        "recall": 0.47927656367746796,
+        "f1": 0.505564387917329,
+        "brier": 0.1464216525806756,
+        "confusion_matrix": [
+          [
+            4120,
+            553
+          ],
+          [
+            691,
+            636
+          ]
+        ]
+      },
+      "drift": {
+        "scenario": "data_drift_t2",
+        "reference_rows": 18000,
+        "current_rows": 6000,
+        "config": {
+          "psi_threshold": 0.2,
+          "alpha": 0.01,
+          "ks_min_effect": 0.1,
+          "bins": 10
+        },
+        "features": [
+          {
+            "feature": "AGE",
+            "psi": 0.002665359366046092,
+            "ks_statistic": 0.014722222222222303,
+            "ks_pvalue": 0.28078904547022887,
+            "ks_pvalue_holm": 0.8423671364106866,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "LIMIT_BAL",
+            "psi": 0.8001437712330953,
+            "ks_statistic": 0.2371666666666667,
+            "ks_pvalue": 3.585688192892702e-223,
+            "ks_pvalue_holm": 1.434275277157081e-222,
+            "psi_alert": true,
+            "ks_alert": true,
+            "drift_detected": true
+          },
+          {
+            "feature": "PAY_0",
+            "psi": 0.0005119765567638597,
+            "ks_statistic": 0.006333333333333302,
+            "ks_pvalue": 0.9931777181291191,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "BILL_AMT1",
+            "psi": 0.0012522189461811415,
+            "ks_statistic": 0.01127777777777772,
+            "ks_pvalue": 0.6120295658255912,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "PAY_AMT1",
+            "psi": 0.6972096361218447,
+            "ks_statistic": 0.33066666666666666,
+            "ks_pvalue": 0.0,
+            "ks_pvalue_holm": 0.0,
+            "psi_alert": true,
+            "ks_alert": true,
+            "drift_detected": true
+          }
+        ],
+        "drift_detected": true,
+        "drifted_features": [
+          "LIMIT_BAL",
+          "PAY_AMT1"
+        ],
+        "evidently_html": "data_drift_t2_evidently.html",
+        "evidently_json": "data_drift_t2_evidently.json",
+        "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+      },
+      "artifacts": {
+        "manifest": "data_drift_t2_manifest.json",
+        "evidently_html": "data_drift_t2_evidently.html",
+        "evidently_json": "data_drift_t2_evidently.json",
+        "statistical_summary": "data_drift_t2_drift.json"
+      },
+      "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+      "subgroups_age": {
+        "18-29": {
+          "rows": 1926,
+          "metrics": {
+            "roc_auc": 0.7180293716116508,
+            "pr_auc": 0.4948046911498092,
+            "precision": 0.5138248847926268,
+            "recall": 0.5296912114014252,
+            "f1": 0.5216374269005848,
+            "brier": 0.14491782019537197,
+            "confusion_matrix": [
+              [
+                1294,
+                211
+              ],
+              [
+                198,
+                223
+              ]
+            ]
+          }
+        },
+        "30-49": {
+          "rows": 3502,
+          "metrics": {
+            "roc_auc": 0.7263960172572687,
+            "pr_auc": 0.5112008407743533,
+            "precision": 0.5513866231647635,
+            "recall": 0.4464993394980185,
+            "f1": 0.49343065693430654,
+            "brier": 0.14298593901122236,
+            "confusion_matrix": [
+              [
+                2470,
+                275
+              ],
+              [
+                419,
+                338
+              ]
+            ]
+          }
+        },
+        "50-100": {
+          "rows": 572,
+          "metrics": {
+            "roc_auc": 0.6883319847049677,
+            "pr_auc": 0.4581613447077186,
+            "precision": 0.528169014084507,
+            "recall": 0.5033557046979866,
+            "f1": 0.5154639175257731,
+            "brier": 0.17251999190641015,
+            "confusion_matrix": [
+              [
+                356,
+                67
+              ],
+              [
+                74,
+                75
+              ]
+            ]
+          }
+        }
+      },
+      "performance_changes_vs_control": {
+        "recall_drop": 0.0301431801055011,
+        "pr_auc_drop": 0.0025575417598329153,
+        "brier_increase": 0.0004900831113876514
+      },
+      "status": "ALERT",
+      "inference_executed": true,
+      "label_interpretation": "Original labels; shifted-X metrics are illustrative counterfactuals",
+      "resources": {
+        "peak_rss_mb": 370.438,
+        "cpu_percent_mean": 73.6,
+        "disk_free_gb": 296.846,
+        "samples": 6,
+        "sampling_interval_seconds": 0.1
+      },
+      "duration_seconds": 0.6783,
+      "mlflow_run_id": "d68f25785f5940aa9292ea3d59da846d"
+    },
+    {
+      "scenario": "data_drift_t3",
+      "rows": 6000,
+      "alerts": [
+        "DATA_DRIFT: LIMIT_BAL, PAY_AMT1"
+      ],
+      "metrics": {
+        "roc_auc": 0.7194941002933203,
+        "pr_auc": 0.4913135075094932,
+        "precision": 0.5404444444444444,
+        "recall": 0.4581763376036172,
+        "f1": 0.49592169657422513,
+        "brier": 0.14712518329827712,
+        "confusion_matrix": [
+          [
+            4156,
+            517
+          ],
+          [
+            719,
+            608
+          ]
+        ]
+      },
+      "drift": {
+        "scenario": "data_drift_t3",
+        "reference_rows": 18000,
+        "current_rows": 6000,
+        "config": {
+          "psi_threshold": 0.2,
+          "alpha": 0.01,
+          "ks_min_effect": 0.1,
+          "bins": 10
+        },
+        "features": [
+          {
+            "feature": "AGE",
+            "psi": 0.002665359366046092,
+            "ks_statistic": 0.014722222222222303,
+            "ks_pvalue": 0.28078904547022887,
+            "ks_pvalue_holm": 0.8423671364106866,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "LIMIT_BAL",
+            "psi": 0.8947745284719467,
+            "ks_statistic": 0.3231666666666667,
+            "ks_pvalue": 0.0,
+            "ks_pvalue_holm": 0.0,
+            "psi_alert": true,
+            "ks_alert": true,
+            "drift_detected": true
+          },
+          {
+            "feature": "PAY_0",
+            "psi": 0.0005119765567638597,
+            "ks_statistic": 0.006333333333333302,
+            "ks_pvalue": 0.9931777181291191,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "BILL_AMT1",
+            "psi": 0.0012522189461811415,
+            "ks_statistic": 0.01127777777777772,
+            "ks_pvalue": 0.6120295658255912,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "PAY_AMT1",
+            "psi": 1.6978238486435104,
+            "ks_statistic": 0.5708888888888889,
+            "ks_pvalue": 0.0,
+            "ks_pvalue_holm": 0.0,
+            "psi_alert": true,
+            "ks_alert": true,
+            "drift_detected": true
+          }
+        ],
+        "drift_detected": true,
+        "drifted_features": [
+          "LIMIT_BAL",
+          "PAY_AMT1"
+        ],
+        "evidently_html": "data_drift_t3_evidently.html",
+        "evidently_json": "data_drift_t3_evidently.json",
+        "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+      },
+      "artifacts": {
+        "manifest": "data_drift_t3_manifest.json",
+        "evidently_html": "data_drift_t3_evidently.html",
+        "evidently_json": "data_drift_t3_evidently.json",
+        "statistical_summary": "data_drift_t3_drift.json"
+      },
+      "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+      "subgroups_age": {
+        "18-29": {
+          "rows": 1926,
+          "metrics": {
+            "roc_auc": 0.717626912666409,
+            "pr_auc": 0.49231171979794414,
+            "precision": 0.5178997613365155,
+            "recall": 0.5154394299287411,
+            "f1": 0.5166666666666667,
+            "brier": 0.14508024223529614,
+            "confusion_matrix": [
+              [
+                1303,
+                202
+              ],
+              [
+                204,
+                217
+              ]
+            ]
+          }
+        },
+        "30-49": {
+          "rows": 3502,
+          "metrics": {
+            "roc_auc": 0.725671750967894,
+            "pr_auc": 0.5077071934956259,
+            "precision": 0.5596491228070175,
+            "recall": 0.42140026420079263,
+            "f1": 0.48078372268274305,
+            "brier": 0.1438904515760036,
+            "confusion_matrix": [
+              [
+                2494,
+                251
+              ],
+              [
+                438,
+                319
+              ]
+            ]
+          }
+        },
+        "50-100": {
+          "rows": 572,
+          "metrics": {
+            "roc_auc": 0.6832230631316738,
+            "pr_auc": 0.4488276734140167,
+            "precision": 0.5294117647058824,
+            "recall": 0.48322147651006714,
+            "f1": 0.5052631578947369,
+            "brier": 0.17381502067363253,
+            "confusion_matrix": [
+              [
+                359,
+                64
+              ],
+              [
+                77,
+                72
+              ]
+            ]
+          }
+        }
+      },
+      "performance_changes_vs_control": {
+        "recall_drop": 0.05124340617935186,
+        "pr_auc_drop": 0.006059427465969991,
+        "brier_increase": 0.0011936138289891651
+      },
+      "status": "ALERT",
+      "inference_executed": true,
+      "label_interpretation": "Original labels; shifted-X metrics are illustrative counterfactuals",
+      "resources": {
+        "peak_rss_mb": 359.414,
+        "cpu_percent_mean": 101.2,
+        "disk_free_gb": 296.842,
+        "samples": 5,
+        "sampling_interval_seconds": 0.1
+      },
+      "duration_seconds": 0.4496,
+      "mlflow_run_id": "da69ce96c4a5447ba569b0cd6a0b4e5b"
+    },
+    {
+      "scenario": "concept_drift",
+      "rows": 6000,
+      "alerts": [
+        "PERFORMANCE_DEGRADATION: investigate labels"
+      ],
+      "metrics": {
+        "roc_auc": 0.4691428838497784,
+        "pr_auc": 0.6098965749252556,
+        "precision": 0.5199692780337941,
+        "recall": 0.18169618894256576,
+        "f1": 0.26929196499602226,
+        "brier": 0.42178216994160705,
+        "confusion_matrix": [
+          [
+            1649,
+            625
+          ],
+          [
+            3049,
+            677
+          ]
+        ]
+      },
+      "drift": {
+        "scenario": "concept_drift",
+        "reference_rows": 18000,
+        "current_rows": 6000,
+        "config": {
+          "psi_threshold": 0.2,
+          "alpha": 0.01,
+          "ks_min_effect": 0.1,
+          "bins": 10
+        },
+        "features": [
+          {
+            "feature": "AGE",
+            "psi": 0.002665359366046092,
+            "ks_statistic": 0.014722222222222303,
+            "ks_pvalue": 0.28078904547022887,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "LIMIT_BAL",
+            "psi": 0.0012131220453148938,
+            "ks_statistic": 0.010333333333333306,
+            "ks_pvalue": 0.7184692857915382,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "PAY_0",
+            "psi": 0.0005119765567638597,
+            "ks_statistic": 0.006333333333333302,
+            "ks_pvalue": 0.9931777181291191,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "BILL_AMT1",
+            "psi": 0.0012522189461811415,
+            "ks_statistic": 0.01127777777777772,
+            "ks_pvalue": 0.6120295658255912,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          },
+          {
+            "feature": "PAY_AMT1",
+            "psi": 0.0013138317666659424,
+            "ks_statistic": 0.015499999999999847,
+            "ks_pvalue": 0.2274280130767743,
+            "ks_pvalue_holm": 1.0,
+            "psi_alert": false,
+            "ks_alert": false,
+            "drift_detected": false
+          }
+        ],
+        "drift_detected": false,
+        "drifted_features": [],
+        "evidently_html": "concept_drift_evidently.html",
+        "evidently_json": "concept_drift_evidently.json",
+        "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+      },
+      "artifacts": {
+        "manifest": "concept_drift_manifest.json",
+        "evidently_html": "concept_drift_evidently.html",
+        "evidently_json": "concept_drift_evidently.json",
+        "statistical_summary": "concept_drift_drift.json"
+      },
+      "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+      "subgroups_age": {
+        "18-29": {
+          "rows": 1926,
+          "metrics": {
+            "roc_auc": 0.45417847859672555,
+            "pr_auc": 0.6003290378676371,
+            "precision": 0.5044052863436124,
+            "recall": 0.19195305951383068,
+            "f1": 0.27808136004857315,
+            "brier": 0.4135705301306875,
+            "confusion_matrix": [
+              [
+                508,
+                225
+              ],
+              [
+                964,
+                229
+              ]
+            ]
+          }
+        },
+        "30-49": {
+          "rows": 3502,
+          "metrics": {
+            "roc_auc": 0.4761939141602754,
+            "pr_auc": 0.6186629007696891,
+            "precision": 0.5294964028776978,
+            "recall": 0.1693511274735389,
+            "f1": 0.25662482566248257,
+            "brier": 0.42856000624980745,
+            "confusion_matrix": [
+              [
+                1002,
+                327
+              ],
+              [
+                1805,
+                368
+              ]
+            ]
+          }
+        },
+        "50-100": {
+          "rows": 572,
+          "metrics": {
+            "roc_auc": 0.46259827044025165,
+            "pr_auc": 0.6015123433698026,
+            "precision": 0.5228758169934641,
+            "recall": 0.2222222222222222,
+            "f1": 0.31189083820662766,
+            "brier": 0.4079353789005456,
+            "confusion_matrix": [
+              [
+                139,
+                73
+              ],
+              [
+                280,
+                80
+              ]
+            ]
+          }
+        }
+      },
+      "performance_changes_vs_control": {
+        "recall_drop": 0.3277235548404033,
+        "pr_auc_drop": -0.11252363994979242,
+        "brier_increase": 0.27585060047231913
+      },
+      "status": "ALERT",
+      "inference_executed": true,
+      "label_interpretation": "Synthetic labels: controlled P(y|X) intervention",
+      "features_preserved": true,
+      "resources": {
+        "peak_rss_mb": 367.301,
+        "cpu_percent_mean": 102.38,
+        "disk_free_gb": 296.838,
+        "samples": 6,
+        "sampling_interval_seconds": 0.1
+      },
+      "duration_seconds": 0.4757,
+      "mlflow_run_id": "c9b9b70657074e3dbc84b788ffa03192"
+    }
+  ],
+  "duration_seconds": 12.8425
+}

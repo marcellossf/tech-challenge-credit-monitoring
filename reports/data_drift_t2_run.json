@@ -1,0 +1,185 @@
+{
+  "scenario": "data_drift_t2",
+  "rows": 6000,
+  "alerts": [
+    "DATA_DRIFT: LIMIT_BAL, PAY_AMT1"
+  ],
+  "metrics": {
+    "roc_auc": 0.7200294916797437,
+    "pr_auc": 0.4948153932156303,
+    "precision": 0.5349032800672834,
+    "recall": 0.47927656367746796,
+    "f1": 0.505564387917329,
+    "brier": 0.1464216525806756,
+    "confusion_matrix": [
+      [
+        4120,
+        553
+      ],
+      [
+        691,
+        636
+      ]
+    ]
+  },
+  "drift": {
+    "scenario": "data_drift_t2",
+    "reference_rows": 18000,
+    "current_rows": 6000,
+    "config": {
+      "psi_threshold": 0.2,
+      "alpha": 0.01,
+      "ks_min_effect": 0.1,
+      "bins": 10
+    },
+    "features": [
+      {
+        "feature": "AGE",
+        "psi": 0.002665359366046092,
+        "ks_statistic": 0.014722222222222303,
+        "ks_pvalue": 0.28078904547022887,
+        "ks_pvalue_holm": 0.8423671364106866,
+        "psi_alert": false,
+        "ks_alert": false,
+        "drift_detected": false
+      },
+      {
+        "feature": "LIMIT_BAL",
+        "psi": 0.8001437712330953,
+        "ks_statistic": 0.2371666666666667,
+        "ks_pvalue": 3.585688192892702e-223,
+        "ks_pvalue_holm": 1.434275277157081e-222,
+        "psi_alert": true,
+        "ks_alert": true,
+        "drift_detected": true
+      },
+      {
+        "feature": "PAY_0",
+        "psi": 0.0005119765567638597,
+        "ks_statistic": 0.006333333333333302,
+        "ks_pvalue": 0.9931777181291191,
+        "ks_pvalue_holm": 1.0,
+        "psi_alert": false,
+        "ks_alert": false,
+        "drift_detected": false
+      },
+      {
+        "feature": "BILL_AMT1",
+        "psi": 0.0012522189461811415,
+        "ks_statistic": 0.01127777777777772,
+        "ks_pvalue": 0.6120295658255912,
+        "ks_pvalue_holm": 1.0,
+        "psi_alert": false,
+        "ks_alert": false,
+        "drift_detected": false
+      },
+      {
+        "feature": "PAY_AMT1",
+        "psi": 0.6972096361218447,
+        "ks_statistic": 0.33066666666666666,
+        "ks_pvalue": 0.0,
+        "ks_pvalue_holm": 0.0,
+        "psi_alert": true,
+        "ks_alert": true,
+        "drift_detected": true
+      }
+    ],
+    "drift_detected": true,
+    "drifted_features": [
+      "LIMIT_BAL",
+      "PAY_AMT1"
+    ],
+    "evidently_html": "data_drift_t2_evidently.html",
+    "evidently_json": "data_drift_t2_evidently.json",
+    "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+  },
+  "artifacts": {
+    "manifest": "data_drift_t2_manifest.json",
+    "evidently_html": "data_drift_t2_evidently.html",
+    "evidently_json": "data_drift_t2_evidently.json",
+    "statistical_summary": "data_drift_t2_drift.json"
+  },
+  "batch_id": "799668cec6b74677ba96a7a814dc71b2",
+  "subgroups_age": {
+    "18-29": {
+      "rows": 1926,
+      "metrics": {
+        "roc_auc": 0.7180293716116508,
+        "pr_auc": 0.4948046911498092,
+        "precision": 0.5138248847926268,
+        "recall": 0.5296912114014252,
+        "f1": 0.5216374269005848,
+        "brier": 0.14491782019537197,
+        "confusion_matrix": [
+          [
+            1294,
+            211
+          ],
+          [
+            198,
+            223
+          ]
+        ]
+      }
+    },
+    "30-49": {
+      "rows": 3502,
+      "metrics": {
+        "roc_auc": 0.7263960172572687,
+        "pr_auc": 0.5112008407743533,
+        "precision": 0.5513866231647635,
+        "recall": 0.4464993394980185,
+        "f1": 0.49343065693430654,
+        "brier": 0.14298593901122236,
+        "confusion_matrix": [
+          [
+            2470,
+            275
+          ],
+          [
+            419,
+            338
+          ]
+        ]
+      }
+    },
+    "50-100": {
+      "rows": 572,
+      "metrics": {
+        "roc_auc": 0.6883319847049677,
+        "pr_auc": 0.4581613447077186,
+        "precision": 0.528169014084507,
+        "recall": 0.5033557046979866,
+        "f1": 0.5154639175257731,
+        "brier": 0.17251999190641015,
+        "confusion_matrix": [
+          [
+            356,
+            67
+          ],
+          [
+            74,
+            75
+          ]
+        ]
+      }
+    }
+  },
+  "performance_changes_vs_control": {
+    "recall_drop": 0.0301431801055011,
+    "pr_auc_drop": 0.0025575417598329153,
+    "brier_increase": 0.0004900831113876514
+  },
+  "status": "ALERT",
+  "inference_executed": true,
+  "label_interpretation": "Original labels; shifted-X metrics are illustrative counterfactuals",
+  "resources": {
+    "peak_rss_mb": 370.438,
+    "cpu_percent_mean": 73.6,
+    "disk_free_gb": 296.846,
+    "samples": 6,
+    "sampling_interval_seconds": 0.1
+  },
+  "duration_seconds": 0.6783,
+  "mlflow_run_id": "d68f25785f5940aa9292ea3d59da846d"
+}

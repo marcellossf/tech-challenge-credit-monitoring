@@ -1,0 +1,17 @@
+{
+  "kind": "data_drift",
+  "seed": 42,
+  "synthetic": true,
+  "simulated_window": 2,
+  "transformations": {
+    "LIMIT_BAL": {
+      "factor": 1.6,
+      "cap": 2000000
+    },
+    "PAY_AMT1": {
+      "factor": 0.4
+    }
+  },
+  "labels_synthetic": false,
+  "causal_claim": "Known synthetic intervention; no real economic cause inferred"
+}

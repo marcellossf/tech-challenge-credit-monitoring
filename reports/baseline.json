@@ -1,0 +1,59 @@
+{
+  "model": "StandardScaler + LogisticRegression",
+  "seed": 42,
+  "features": [
+    "AGE",
+    "LIMIT_BAL",
+    "PAY_0",
+    "BILL_AMT1",
+    "PAY_AMT1"
+  ],
+  "threshold": 0.27798968172026783,
+  "threshold_policy": "maximum validation F1; academic choice, not credit approval policy",
+  "train_rows": 18000,
+  "validation_rows": 6000,
+  "metrics": {
+    "roc_auc": 0.6963934939625751,
+    "pr_auc": 0.46826953381405734,
+    "precision": 0.5019700551615445,
+    "recall": 0.4800301431801055,
+    "f1": 0.49075500770416025,
+    "brier": 0.14981346369144175,
+    "confusion_matrix": [
+      [
+        4041,
+        632
+      ],
+      [
+        690,
+        637
+      ]
+    ]
+  },
+  "dummy_metrics": {
+    "roc_auc": 0.5,
+    "pr_auc": 0.22116666666666668,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "brier": 0.17225197530864197,
+    "confusion_matrix": [
+      [
+        4673,
+        0
+      ],
+      [
+        1327,
+        0
+      ]
+    ]
+  },
+  "coefficients_standardized": {
+    "AGE": 0.07251155387051314,
+    "LIMIT_BAL": -0.18563974790890786,
+    "PAY_0": 0.8129330362433755,
+    "BILL_AMT1": -0.10808076072332078,
+    "PAY_AMT1": -0.15523627347514937
+  },
+  "model_sha256": "ee3be79a945edbca52cfe2e0a50c70940485dcc7a6cf33c8b2e36aba2fe8609c"
+}

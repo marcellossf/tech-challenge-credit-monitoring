@@ -4,6 +4,8 @@ Contratos de dados, data/concept drift, relatórios estatísticos, logs, infraes
 
 **Estado: pipeline técnico executado e validado localmente.** Vídeo e submissão institucional pendentes.
 
+**Validação:** 38 testes passaram, CI Linux aprovado e demo completa com 30.000 registros. Controle sem alertas; lote inválido bloqueado; LIMIT_BAL/PAY_AMT1 detectadas; concept drift com recall de 0,5094 para 0,1817 e Brier de 0,1459 para 0,4218. [Evidências e telas](docs/evidencias.md), [CI](https://github.com/marcellossf/tech-challenge-credit-monitoring/actions/runs/38099510133).
+
 Entrega individual prevista para **17/11/2026 às 23h59 (America/Sao_Paulo)**.
 
 - [Plano de execução e critérios de aceite](task_plan.md)
@@ -35,10 +37,12 @@ Abrir reports/index.html no navegador. Linux/macOS: `.venv/bin/python`. Comandos
 ./.venv/Scripts/python.exe -m ruff check .
 ./.venv/Scripts/python.exe -m ruff format --check .
 ./.venv/Scripts/python.exe -m pip check
-./.venv/Scripts/mlflow.exe ui --backend-store-uri sqlite:///artifacts/mlflow/tracking.db --host 127.0.0.1 --port 5000
+./.venv/Scripts/mlflow.exe ui --backend-store-uri sqlite:///artifacts/mlflow/tracking.db --host 127.0.0.1 --port 5001 --workers 1
 ```
 
-[MLflow local](http://127.0.0.1:5000) registra runs/artefatos em SQLite/local. HTML não precisa de servidor. Rejeição esperada aparece FAILED no MLflow com status=BLOCKED; demo continua. Erros inesperados terminam com falha.
+[MLflow local](http://127.0.0.1:5001) registra runs/artefatos em SQLite/local. HTML não precisa de servidor. Usar um worker no Windows. Rejeição esperada aparece FAILED no MLflow com status=BLOCKED; demo continua. Erros inesperados terminam com falha.
+
+Na interface MLflow, selecionar **Model training** e abrir **credit-monitoring**. O modo inicial GenAI não mostra o treinamento tabular. A porta pode ser alterada caso já esteja ocupada.
 
 ## Arquitetura
 

@@ -1,0 +1,14 @@
+{
+  "dataset_ge_5000": true,
+  "all_scenarios": true,
+  "invalid_blocked_before_inference": true,
+  "control_no_alerts": true,
+  "two_features_detected": true,
+  "concept_features_preserved": true,
+  "concept_without_input_drift": true,
+  "concept_performance_alert": true,
+  "resources_measured": true,
+  "mlflow_tracked": true,
+  "artifacts_present": true,
+  "dashboard_present": true
+}

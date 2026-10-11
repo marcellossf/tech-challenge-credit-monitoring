@@ -1,0 +1,68 @@
+{
+  "scenario": "control",
+  "reference_rows": 18000,
+  "current_rows": 6000,
+  "config": {
+    "psi_threshold": 0.2,
+    "alpha": 0.01,
+    "ks_min_effect": 0.1,
+    "bins": 10
+  },
+  "features": [
+    {
+      "feature": "AGE",
+      "psi": 0.002665359366046092,
+      "ks_statistic": 0.014722222222222303,
+      "ks_pvalue": 0.28078904547022887,
+      "ks_pvalue_holm": 1.0,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    },
+    {
+      "feature": "LIMIT_BAL",
+      "psi": 0.0012131220453148938,
+      "ks_statistic": 0.010333333333333306,
+      "ks_pvalue": 0.7184692857915382,
+      "ks_pvalue_holm": 1.0,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    },
+    {
+      "feature": "PAY_0",
+      "psi": 0.0005119765567638597,
+      "ks_statistic": 0.006333333333333302,
+      "ks_pvalue": 0.9931777181291191,
+      "ks_pvalue_holm": 1.0,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    },
+    {
+      "feature": "BILL_AMT1",
+      "psi": 0.0012522189461811415,
+      "ks_statistic": 0.01127777777777772,
+      "ks_pvalue": 0.6120295658255912,
+      "ks_pvalue_holm": 1.0,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    },
+    {
+      "feature": "PAY_AMT1",
+      "psi": 0.0013138317666659424,
+      "ks_statistic": 0.015499999999999847,
+      "ks_pvalue": 0.2274280130767743,
+      "ks_pvalue_holm": 1.0,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    }
+  ],
+  "drift_detected": false,
+  "drifted_features": [],
+  "evidently_html": "control_evidently.html",
+  "evidently_json": "control_evidently.json",
+  "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+}

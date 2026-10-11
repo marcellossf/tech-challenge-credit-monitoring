@@ -25,3 +25,9 @@
 - Demo completa passou nas 12 verificações: controle saudável, inválido bloqueado, duas features com drift e conceito com X preservado/alerta de desempenho.
 - HTML conferido visualmente em Chrome 1440x1000; erro inicial somente favicon inexistente, corrigido com ícone inline. CLI Playwright bloqueia file://; servido apenas reports em localhost.
 - Revisão por subagente: paths de relatórios normalizados e run.json inclui MLflow ID; código recebe fingerprint para rastreabilidade.
+
+- Código publicado no commit 40fca71; demo final regenerada contra esse commit, batch 799668cec6b74677ba96a7a814dc71b2.
+- GitHub Actions 38099510133: SUCCESS em Linux, instalação lock + pip check + Ruff + 38 testes + demo completa + upload de evidências.
+- Interface MLflow validada em Model training/credit-monitoring; Windows exige --workers 1, porta 5001 usada. Tentativa inicial com múltiplos workers falhou WinError10022 e porta5000 residual, processos da tentativa própria encerrados.
+- Reports e docs revisados: sem caminhos do usuário ou credenciais; gráficos Evidently agregados e sem ID/labels.
+- Vídeo e submissão continuam pendentes do autor.

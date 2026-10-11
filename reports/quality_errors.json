@@ -1,0 +1,21 @@
+{
+  "scenario": "invalid",
+  "rejected_rows": 6001,
+  "failures": [
+    {
+      "column": "AGE",
+      "rule": "age_range",
+      "count": 1
+    },
+    {
+      "column": "LIMIT_BAL",
+      "rule": "not_nullable",
+      "count": 1
+    },
+    {
+      "column": "row_id",
+      "rule": "field_uniqueness",
+      "count": 2
+    }
+  ]
+}

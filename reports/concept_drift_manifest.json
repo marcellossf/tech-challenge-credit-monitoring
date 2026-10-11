@@ -1,0 +1,13 @@
+{
+  "kind": "concept_drift",
+  "seed": 42,
+  "synthetic": true,
+  "segment": "PAY_0 <= 0",
+  "mechanism": "Replace labels within segment with Bernoulli(default_probability)",
+  "default_probability": 0.65,
+  "segment_rows": 4638,
+  "labels_changed": 2823,
+  "labels_synthetic": true,
+  "features_preserved": true,
+  "interpretation": "Synthetic change in P(y|X); marginal feature drift is not expected"
+}

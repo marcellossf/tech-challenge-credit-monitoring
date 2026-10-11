@@ -1,0 +1,75 @@
+{
+  "source": "https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients",
+  "download_url": "https://archive.ics.uci.edu/static/public/350/default+of+credit+card+clients.zip",
+  "author": "I-Cheng Yeh",
+  "doi": "10.24432/C55S3H",
+  "license": "CC BY 4.0",
+  "raw_sha256": "56c885f84457f6680f8438f02bfcdac9579323d8a94465ee5f26e32baa727602",
+  "seed": 42,
+  "rows": 30000,
+  "rows_rejected": 0,
+  "features": [
+    "AGE",
+    "LIMIT_BAL",
+    "PAY_0",
+    "BILL_AMT1",
+    "PAY_AMT1"
+  ],
+  "split_method": "stratified random 60/20/20; simulated production, not temporal holdout",
+  "splits": {
+    "reference": {
+      "rows": 18000,
+      "default_rate": 0.2212222222222222,
+      "sha256": "e1da2f070259c08c96d7168e3efe7e13ce3e3141dc437c036e4ce91355dbf996"
+    },
+    "validation": {
+      "rows": 6000,
+      "default_rate": 0.22116666666666668,
+      "sha256": "3706a8ab684e6b71e3ce662b5cf26ae89674533e9fd0d2fd7e1dfef9a64e115f"
+    },
+    "production": {
+      "rows": 6000,
+      "default_rate": 0.22116666666666668,
+      "sha256": "aee59537290d2d6da710725bca43532c36e79040bf6463bbc7a19e821ed62472"
+    }
+  },
+  "profile": {
+    "AGE": {
+      "dtype": "int64",
+      "null_count": 0,
+      "min": 21.0,
+      "max": 79.0
+    },
+    "LIMIT_BAL": {
+      "dtype": "int64",
+      "null_count": 0,
+      "min": 10000.0,
+      "max": 1000000.0
+    },
+    "PAY_0": {
+      "dtype": "int64",
+      "null_count": 0,
+      "min": -2.0,
+      "max": 8.0
+    },
+    "BILL_AMT1": {
+      "dtype": "int64",
+      "null_count": 0,
+      "min": -165580.0,
+      "max": 964511.0
+    },
+    "PAY_AMT1": {
+      "dtype": "int64",
+      "null_count": 0,
+      "min": 0.0,
+      "max": 873552.0
+    }
+  },
+  "excluded_predictors": [
+    "row_id",
+    "SEX",
+    "EDUCATION",
+    "MARRIAGE",
+    "target"
+  ]
+}

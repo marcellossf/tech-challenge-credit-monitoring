@@ -1,0 +1,71 @@
+{
+  "scenario": "data_drift_t2",
+  "reference_rows": 18000,
+  "current_rows": 6000,
+  "config": {
+    "psi_threshold": 0.2,
+    "alpha": 0.01,
+    "ks_min_effect": 0.1,
+    "bins": 10
+  },
+  "features": [
+    {
+      "feature": "AGE",
+      "psi": 0.002665359366046092,
+      "ks_statistic": 0.014722222222222303,
+      "ks_pvalue": 0.28078904547022887,
+      "ks_pvalue_holm": 0.8423671364106866,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    },
+    {
+      "feature": "LIMIT_BAL",
+      "psi": 0.8001437712330953,
+      "ks_statistic": 0.2371666666666667,
+      "ks_pvalue": 3.585688192892702e-223,
+      "ks_pvalue_holm": 1.434275277157081e-222,
+      "psi_alert": true,
+      "ks_alert": true,
+      "drift_detected": true
+    },
+    {
+      "feature": "PAY_0",
+      "psi": 0.0005119765567638597,
+      "ks_statistic": 0.006333333333333302,
+      "ks_pvalue": 0.9931777181291191,
+      "ks_pvalue_holm": 1.0,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    },
+    {
+      "feature": "BILL_AMT1",
+      "psi": 0.0012522189461811415,
+      "ks_statistic": 0.01127777777777772,
+      "ks_pvalue": 0.6120295658255912,
+      "ks_pvalue_holm": 1.0,
+      "psi_alert": false,
+      "ks_alert": false,
+      "drift_detected": false
+    },
+    {
+      "feature": "PAY_AMT1",
+      "psi": 0.6972096361218447,
+      "ks_statistic": 0.33066666666666666,
+      "ks_pvalue": 0.0,
+      "ks_pvalue_holm": 0.0,
+      "psi_alert": true,
+      "ks_alert": true,
+      "drift_detected": true
+    }
+  ],
+  "drift_detected": true,
+  "drifted_features": [
+    "LIMIT_BAL",
+    "PAY_AMT1"
+  ],
+  "evidently_html": "data_drift_t2_evidently.html",
+  "evidently_json": "data_drift_t2_evidently.json",
+  "interpretation": "Distribution shift does not establish concept drift or an economic cause"
+}
