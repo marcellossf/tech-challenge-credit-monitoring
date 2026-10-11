@@ -49,3 +49,4 @@ A prevalência de inadimplência muda de 0.2212 para 0.6210 nos labels sintétic
 - CPU/RSS/disco medidos localmente por amostragem; não equivalem a SLA de serviço.
 - Vídeo, acesso institucional e recibo de envio ainda pendentes.
 
+Esta página reúne os resultados e as capturas da execução registrada. O [README](../README.md) apresenta a documentação consolidada. A reprodução local é opcional para a apresentação dessas evidências.

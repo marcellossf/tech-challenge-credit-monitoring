@@ -13,3 +13,5 @@ mlartifacts/
 ci-reports/
 .playwright-cli/
 output/
+
+.private/
