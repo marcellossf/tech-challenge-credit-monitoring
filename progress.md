@@ -31,3 +31,5 @@
 - Interface MLflow validada em Model training/credit-monitoring; Windows exige --workers 1, porta 5001 usada. Tentativa inicial com múltiplos workers falhou WinError10022 e porta5000 residual, processos da tentativa própria encerrados.
 - Reports e docs revisados: sem caminhos do usuário ou credenciais; gráficos Evidently agregados e sem ID/labels.
 - Vídeo e submissão continuam pendentes do autor.
+
+- Atualização automática leu dois documentos usando cp1252; restaurados de Git/UTF-8 e verificados para evitar texto corrompido. Código e resultados não afetados.
