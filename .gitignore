@@ -1,0 +1,11 @@
+tmp/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env
+data/
+artifacts/
+mlruns/
+mlartifacts/
