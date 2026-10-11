@@ -33,3 +33,6 @@
 - Vídeo e submissão continuam pendentes do autor.
 
 - Atualização automática leu dois documentos usando cp1252; restaurados de Git/UTF-8 e verificados para evitar texto corrompido. Código e resultados não afetados.
+
+## Apresentação pelo GitHub
+

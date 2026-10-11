@@ -14,7 +14,7 @@ Entrega individual prevista para **17/11/2026 às 23h59 (America/Sao_Paulo)**.
 
 Stack: scikit-learn, Pandera, Evidently e MLflow, base pública financeira e execução local reproduzível.
 
-Dataset proposto: [UCI Default of Credit Card Clients](https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients), I-Cheng Yeh, CC BY 4.0. Seleção depende de inspeção. Dados individuais/cache/modelos locais ficam fora do Git.
+Dataset utilizado: [UCI Default of Credit Card Clients](https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients), I-Cheng Yeh, CC BY 4.0. Download, inspeção e validação concluídos. Dados individuais/cache/modelos locais ficam fora do Git.
 
 Vídeo: pendente.
 
@@ -120,4 +120,3 @@ Exercício acadêmico com base pública histórica; licença pública não garan
 
 Hipótese choque econômico → capacidade de pagamento → inadimplência; seleção/política/perfil confundem associações. [Análise causal](docs/causalidade.md) distingue causa programada de hipótese real. PSI/KS não identificam causa econômica.
 
-Vídeo STAR de 4min30: pendente de gravação/publicação pelo autor. Confirmar portal/formato de envio. Commits representam trabalho real, sem datas simuladas. Assistência de IA usada no planejamento/implementação: declarar conforme regras acadêmicas; autor precisa executar, revisar e dominar explicação.

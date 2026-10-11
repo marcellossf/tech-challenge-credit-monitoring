@@ -49,4 +49,3 @@ A prevalência de inadimplência muda de 0.2212 para 0.6210 nos labels sintétic
 - CPU/RSS/disco medidos localmente por amostragem; não equivalem a SLA de serviço.
 - Vídeo, acesso institucional e recibo de envio ainda pendentes.
 
-Para filmar: abrir reports/index.html e usar Model training > credit-monitoring no MLflow local. O modo padrão GenAI não mostra os runs deste classificador. Usar porta 5001 e --workers 1 no Windows.
