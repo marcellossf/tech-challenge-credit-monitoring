@@ -9,3 +9,7 @@ data/
 artifacts/
 mlruns/
 mlartifacts/
+*.egg-info/
+ci-reports/
+.playwright-cli/
+output/

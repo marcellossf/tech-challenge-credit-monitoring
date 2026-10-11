@@ -1,0 +1,40 @@
+name: validate-credit-monitoring
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DO_NOT_TRACK: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Install
+        run: |
+          pip install -r requirements.lock
+          pip install --no-deps -e '.[dev]'
+      - name: Dependency compatibility
+        run: pip check
+      - name: Lint and format
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Tests
+        run: pytest -q
+      - name: Full-sample demo and evidence gate
+        run: python -m credit_monitoring.cli demo --report-dir ci-reports
+      - name: Upload aggregate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: credit-monitoring-evidence
+          path: ci-reports/
+          if-no-files-found: warn

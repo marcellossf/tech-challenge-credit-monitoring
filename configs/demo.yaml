@@ -1,0 +1,9 @@
+seed: 42
+drift:
+  psi_threshold: 0.20
+  ks_alpha: 0.01
+  ks_effect_threshold: 0.10
+performance:
+  recall_drop_threshold: 0.10
+  pr_auc_drop_threshold: 0.10
+  brier_increase_threshold: 0.05

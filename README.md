@@ -1,8 +1,8 @@
 # Tech Challenge 4 — Confiabilidade de modelos de crédito
 
-Projeto acadêmico MLET: observabilidade contínua, qualidade de dados, data/concept drift e governança.
+Contratos de dados, data/concept drift, relatórios estatísticos, logs, infraestrutura e governança para um classificador acadêmico de inadimplência.
 
-**Estado: planejamento.** Modelo, contratos, simulações, relatórios e vídeo ainda não implementados. Não há resultados experimentais nesta versão.
+**Estado: pipeline técnico executado e validado localmente.** Vídeo e submissão institucional pendentes.
 
 Entrega individual prevista para **17/11/2026 às 23h59 (America/Sao_Paulo)**.
 
@@ -10,8 +10,110 @@ Entrega individual prevista para **17/11/2026 às 23h59 (America/Sao_Paulo)**.
 - [Requisitos e fontes](findings.md)
 - [Registro de progresso](progress.md)
 
-Proposta: scikit-learn, Pandera, Evidently e MLflow, base pública financeira e execução local reproduzível. Implementação futura acrescentará instruções testadas de instalação/reprodução e governança consolidada neste README.
+Stack: scikit-learn, Pandera, Evidently e MLflow, base pública financeira e execução local reproduzível.
 
 Dataset proposto: [UCI Default of Credit Card Clients](https://archive.ics.uci.edu/dataset/350/default%2Bof%2Bcredit%2Bcard%2Bclients), I-Cheng Yeh, CC BY 4.0. Seleção depende de inspeção. Dados individuais/cache/modelos locais ficam fora do Git.
 
 Vídeo: pendente.
+
+## Instalação e execução
+
+Python **3.13** é o ambiente de referência. Primeira execução precisa de internet para UCI; depois usa cache. Sem cloud/Kaggle.
+
+```powershell
+python -m venv .venv
+./.venv/Scripts/python.exe -m pip install -r requirements.lock
+./.venv/Scripts/python.exe -m pip install --no-deps -e ".[dev]"
+./.venv/Scripts/python.exe -m credit_monitoring.cli demo
+./.venv/Scripts/python.exe -m credit_monitoring.cli verify
+```
+
+Abrir reports/index.html no navegador. Linux/macOS: `.venv/bin/python`. Comandos: `download` prepara dados; `train` prepara/treina; `demo` integra cenários e verifica evidências; `verify` verifica artefatos existentes. Opções: `--data-dir`, `--artifact-dir`, `--report-dir`, `--config`, `--tracking-uri`.
+
+```powershell
+./.venv/Scripts/python.exe -m pytest -q
+./.venv/Scripts/python.exe -m ruff check .
+./.venv/Scripts/python.exe -m ruff format --check .
+./.venv/Scripts/python.exe -m pip check
+./.venv/Scripts/mlflow.exe ui --backend-store-uri sqlite:///artifacts/mlflow/tracking.db --host 127.0.0.1 --port 5000
+```
+
+[MLflow local](http://127.0.0.1:5000) registra runs/artefatos em SQLite/local. HTML não precisa de servidor. Rejeição esperada aparece FAILED no MLflow com status=BLOCKED; demo continua. Erros inesperados terminam com falha.
+
+## Arquitetura
+
+```mermaid
+flowchart LR
+  A[UCI e hash] --> B[Split 60/20/20]
+  B --> C[Contrato e baseline congelado]
+  B --> D[Produção simulada]
+  D --> E[Contrato do lote]
+  E -->|Inválido| F[Bloqueio e log]
+  E -->|Válido| G[Inferência]
+  C --> G
+  G --> H[PSI / KS / Evidently / desempenho]
+  F --> I[MLflow e HTML]
+  H --> I
+```
+
+`predict_validated` verifica contrato antes de invocar o modelo. Referência imutável. Identificadores e alvo nunca são features.
+
+## Dados e baseline
+
+30.000 registros reais. Split estratificado seed42: 18.000 referência/treino, 6.000 validação e 6.000 produção simulada, sem sobreposição. StandardScaler ajustado no treino + LogisticRegression. Limiar maximiza F1 na validação e fica congelado; não é política recomendada de crédito.
+
+Features: AGE, LIMIT_BAL, PAY_0, BILL_AMT1 e PAY_AMT1. Limite não é renda; moeda NT$. Sexo, escolaridade e estado civil excluídos. Base Taiwan/2005 não representa Brasil atual. [Dicionário](docs/data_dictionary.md).
+
+ROC-AUC, PR-AUC (average precision), precision, recall, F1, Brier e matriz, com DummyClassifier de comparação. reports/provenance.json registra hashes/perfil/contagens; baseline.json contém modelo/limiar/métricas. Joblib local em artifacts: carregar apenas arquivos de origem confiável.
+
+## Contratos
+
+Pandera estrito sem coerção/correção: colunas/tipos, não nulos/finitos, idade inteira 18–100, limite positivo até NT$2.000.000, PAY_0 inteiro -2..9, pagamento não negativo, chave positiva inteira única. Fatura negativa pode ser legítima. Faixas são políticas explícitas da demo. Alvo 0/1 obrigatório na avaliação, opcional na inferência e validado se presente.
+
+Uma violação bloqueia o lote todo antes de prever. Erros contêm somente coluna/regra/contagem de ocorrências Pandera, não número deduplicado de linhas inválidas. rejected_rows mostra volume bloqueado.
+
+## Cenários e alertas
+
+| Cenário | Intervenção | Evidência esperada |
+|---|---|---|
+| control | Holdout original | Variação natural sem alerta relevante |
+| invalid | Nulo, idade impossível e chave duplicada | Bloqueio antes da inferência |
+| data_drift_t1/t2/t3 | LIMIT_BAL ×1,3/1,6/2,0; PAY_AMT1 ×0,7/0,4/0,15 | Duas features mudam, contrato válido |
+| concept_drift | X idêntico; substituir y por Bernoulli(0,65) em PAY_0<=0 | P(y dado X) muda, desempenho cai sem drift de entrada |
+
+Janelas sintéticas reutilizam mesmo holdout para isolar intervenções; não são períodos reais/independentes. Concept labels são sintéticos. Data drift conserva labels originais só para ilustração, não verdade observada sob nova economia.
+
+Evidently exporta HTML/JSON de distribuições agregadas só com features. Nosso PSI usa quantis fixados na referência, caudas infinitas e suavização de zeros; KS usa correção Holm. configs/demo.yaml define:
+
+- Distribuição: PSI ≥0,20 ou KS p ajustado <0,01 com efeito ≥0,10.
+- Desempenho versus controle: queda absoluta recall ≥0,10 ou PR-AUC ≥0,10 ou aumento Brier ≥0,05.
+
+Limiares de demonstração, não universais. Evidently usa PSI explícito; nossa decisão inclui KS e pode diferir por implementação/bins. Distribuição não prova concept drift, degradação ou causa econômica. Sem labels, desempenho é indisponível.
+
+## Observabilidade e resposta
+
+reports/index.html compara cenários; pipeline.jsonl centraliza eventos por batch_id/estágio. MLflow registra seed, hashes/versões, métricas e artefatos.
+
+Saúde: status, volume, duração, rejeições e alertas. Infraestrutura: RSS máximo amostrado, CPU média do processo e menor espaço livre. Amostras 0,1s podem perder picos e CPU multicore pode superar 100%. Monitoramento local, não serviço 24/7/SLA.
+
+Resposta: bloquear inválidos; investigar fonte/segmento/contrato; obter labels; avaliar revisão humana/recalibração/retraining em validação; promover após revisão e preservar rollback. Sem reentreino automático por alerta.
+
+## Governança, privacidade e LGPD
+
+Exercício acadêmico com base pública histórica; licença pública não garante anonimização nem substitui análise de tratamento. Remover ID não impede reidentificação por atributos.
+
+**Minimização/acesso:** dados/modelos/cache fora do Git; chave de origem só local para split/deduplicação, excluída do modelo/relatórios. Exportar agregados, não registros/CPF/nomes/contatos. Cache acessível ao responsável; criptografia do dispositivo/backups restritos são recomendações, não capacidades comprovadas no código.
+
+**Finalidade/base legal:** separar exercício de concessão real. Na fintech hipotética, proteção do crédito é hipótese do art. 7º, X; princípios do art. 6º exigem análise contextual. Não presumir consentimento nem aplicar essa hipótese automaticamente à pesquisa. Art. 4º, II, b ressalva arts. 7º/11 para fins acadêmicos. [LGPD oficial](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm).
+
+**Retenção proposta:** cache/dados/modelo até avaliação, eliminação até 30 dias após encerramento confirmado; agregados por 90 dias se necessários. Prazos internos, não obrigação legal universal. Responsável revisa necessidade/remove backups; sem descarte automático. Histórico público pode preservar agregados após exclusão local: revisar antes de publicar.
+
+**Vieses:** excluir sexo/estado civil/escolaridade não elimina proxies. Métricas por idade exigem n≥200 e ≥30 por classe; diagnóstico parcial, sem certificação de equidade. Não extrapolar base antiga de Taiwan para Brasil.
+
+**Revisão:** fintech hipotética define controlador, operador, encarregado/canal e revisão de decisão automatizada (art. 20). Recomendar revisão humana em contestação, explicação e trilha de auditoria. Projeto não concede crédito nem declara compliance integral.
+
+## Causalidade e apresentação
+
+Hipótese choque econômico → capacidade de pagamento → inadimplência; seleção/política/perfil confundem associações. [Análise causal](docs/causalidade.md) distingue causa programada de hipótese real. PSI/KS não identificam causa econômica.
+
+Vídeo STAR de 4min30: pendente de gravação/publicação pelo autor. Confirmar portal/formato de envio. Commits representam trabalho real, sem datas simuladas. Assistência de IA usada no planejamento/implementação: declarar conforme regras acadêmicas; autor precisa executar, revisar e dominar explicação.

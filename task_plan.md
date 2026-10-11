@@ -1,6 +1,6 @@
 # Tech Challenge 4 — plano completo
 
-Atualizado em 10/10/2026. Entrega individual: **17/11/2026 às 23h59 (America/Sao_Paulo)**. Vídeo STAR alvo: **4min30**, limite de 5 minutos. Este documento planeja trabalho futuro; não há sistema implementado nem resultados experimentais nesta versão.
+Atualizado em 10/10/2026. Entrega individual: **17/11/2026 às 23h59 (America/Sao_Paulo)**. Vídeo STAR alvo: **4min30**, limite de 5 minutos. Implementação iniciada em 10/10/2026 por autorização do usuário; resultados só serão registrados após execução validada.
 
 ## Objetivo e stack
 
@@ -149,9 +149,15 @@ Correções reais geram `fix:`; não fabricar bugs para gerar histórico. Antes 
 - [x] PDF lido e rubrica conferida visualmente.
 - [x] Prazo/individual/vídeo confirmados.
 - [x] Revisão independente com subagente.
-- [x] Repositório privado criado: https://github.com/marcellossf/tech-challenge-credit-monitoring
-- [ ] Etapas de implementação e entrega executadas em sessões futuras.
+- [x] Repositório público, conforme autorização de 10/10/2026: https://github.com/marcellossf/tech-challenge-credit-monitoring
+- [x] Implementação técnica das etapas 1–7 executada e validada localmente em 10/10/2026.
+- [ ] CI remoto, evidências finais e revisão de apresentação.
+- [ ] Vídeo e submissão institucional.
 
 Pendências: disponibilidade semanal; confirmação institucional para entrega individual (PDF diz a princípio em grupo); regras de assistência IA; portal/formato de envio. Não impedem planejamento.
 
 Ocorrências: runtime sem fitz, resolvido com pypdf/pypdfium2; impressão cp1252 falhou, arquivo UTF-8 lido; Git inicialmente sem commits/remote; patch inicial rejeitado por operações duplicadas no mesmo arquivo, refeito sem alteração parcial.
+
+## Execução iniciada em 10/10/2026
+
+Usuário autorizou tornar o repo público e começar. Cronograma é referência; etapas adiantadas serão registradas com datas reais. Disponível Python 3.13.6; ambiente isolado será validado nessa versão, suporte declarado >=3.11,<3.14. Três subagentes implementam contratos, drift e observabilidade em arquivos separados; root integra dados/baseline/pipeline/CLI.
